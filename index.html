@@ -294,5 +294,161 @@
       }
     }
   </script>
+  <script>
+  const countDownDate = new Date("Dec 5, 2025 11:10:00").getTime();
+
+  // 💌 Daily messages
+  const loveMessages = [
+    "You’re the reason my heart smiles every morning 💖",
+    "Counting stars till I see you again 🌟",
+    "Every day apart is one step closer to our hug 💞",
+    "You make ordinary moments feel magical ✨",
+    "Your laugh still echoes in my head like music 🎶",
+    "You’re my peace, my chaos, and my favorite dream 🌈",
+    "Our story’s my favorite chapter 📖",
+    "If love was light, you’d be my sunrise 🌅",
+    "I’d choose you in every lifetime 💫",
+    "You’re my home, no matter where I am 🏡",
+  ];
+
+  // 🌈 Rotating themes
+  const themes = [
+    { bg: "linear-gradient(135deg, #ffe6eb, #fff6f8)", glow: "rgba(255,130,150,0.35)" },
+    { bg: "linear-gradient(135deg, #e0f7fa, #fff3e0)", glow: "rgba(100,200,255,0.35)" },
+    { bg: "linear-gradient(135deg, #fff1eb, #ace0f9)", glow: "rgba(255,150,200,0.35)" },
+    { bg: "linear-gradient(135deg, #fceabb, #f8b500)", glow: "rgba(255,200,150,0.35)" },
+    { bg: "linear-gradient(135deg, #d4fc79, #96e6a1)", glow: "rgba(150,255,180,0.35)" },
+    { bg: "linear-gradient(135deg, #a1c4fd, #c2e9fb)", glow: "rgba(120,180,255,0.35)" },
+    { bg: "linear-gradient(135deg, #ffecd2, #fcb69f)", glow: "rgba(255,160,140,0.35)" },
+  ];
+
+  // 💫 Daily emojis
+  const emojisByDay = ["💖", "🌸", "💫", "🌈", "🌟", "🎈", "🦋"];
+
+  // 💬 Romantic quotes
+  const loveQuotes = [
+    "“Every moment spent with you is a moment I treasure.” – Aerosmith",
+    "“I love you not only for what you are, but for what I am when I am with you.” – Roy Croft",
+    "“You are my today and all of my tomorrows.” – Leo Christopher",
+    "“I saw that you were perfect, and I loved you. Then I saw that you were not perfect and I loved you even more.” – Angelita Lim",
+    "“To me, you are perfect.” – Love Actually 💕",
+  ];
+
+  // 🎶 Romantic song URLs (short clips / public YouTube embeds)
+  const songs = [
+    { title: "Perfect – Ed Sheeran", url: "https://www.youtube.com/embed/2Vv-BfVoq4g" },
+    { title: "All of Me – John Legend", url: "https://www.youtube.com/embed/450p7goxZqg" },
+    { title: "Dil Diyan Gallan – Atif Aslam", url: "https://www.youtube.com/embed/SAcpESN_Fk4" },
+    { title: "Tum Se Hi – Mohit Chauhan", url: "https://www.youtube.com/embed/4I7W4A4Pcr8" },
+    { title: "A Thousand Years – Christina Perri", url: "https://www.youtube.com/embed/rtOvBOTyX00" },
+    { title: "Raabta – Arijit Singh", url: "https://www.youtube.com/embed/VaD6JdxZqz8" },
+  ];
+
+  // Milestones
+  const milestones = {
+    30: "Only 30 days left, baby! Can’t wait 💓",
+    20: "20 days to go — the butterflies are real 🦋",
+    10: "Just 10 days! I can already feel your hug 🤗",
+    5: "Only 5 days left, countdown fever!! 💞",
+    1: "Tomorrow’s the day! Our wait ends 💍"
+  };
+
+  // Calculate daily indexes
+  const today = new Date();
+  const dayIndex = today.getDate() % loveMessages.length;
+  const themeIndex = today.getDate() % themes.length;
+  const emoji = emojisByDay[today.getDate() % emojisByDay.length];
+  const isQuoteDay = today.getDate() % 2 === 0; // alternate quote and song days
+
+  // Apply theme
+  const theme = themes[themeIndex];
+  document.body.style.background = theme.bg;
+  document.documentElement.style.setProperty("--glow", `0 0 25px ${theme.glow}`);
+
+  // Countdown
+  function updateCountdown() {
+    const now = new Date().getTime();
+    const distance = countDownDate - now;
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    document.getElementById("days").textContent = days;
+    document.getElementById("hours").textContent = hours;
+    document.getElementById("minutes").textContent = minutes;
+    document.getElementById("seconds").textContent = seconds;
+
+    if (milestones[days]) showFloatingText(milestones[days]);
+  }
+  setInterval(updateCountdown, 1000);
+  updateCountdown();
+
+  // Daily message
+  const messageBox = document.createElement("p");
+  messageBox.textContent = loveMessages[dayIndex];
+  messageBox.style.marginTop = "15px";
+  messageBox.style.fontSize = "1.1rem";
+  messageBox.style.color = "#555";
+  messageBox.style.fontWeight = "500";
+  messageBox.style.opacity = "0";
+  messageBox.style.transition = "opacity 1s ease";
+  document.querySelector(".container").appendChild(messageBox);
+  setTimeout(() => (messageBox.style.opacity = "1"), 500);
+
+  // Floating emojis
+  function createFloatingEmojis() {
+    const el = document.createElement("div");
+    el.className = "floating-word";
+    el.textContent = emoji;
+    el.style.left = `${Math.random() * 100}%`;
+    el.style.bottom = `-20px`;
+    el.style.fontSize = `${1 + Math.random() * 2}rem`;
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 5000);
+  }
+  setInterval(createFloatingEmojis, 2000);
+
+  // Floating text
+  function showFloatingText(text) {
+    const word = document.createElement("div");
+    word.className = "floating-word";
+    word.textContent = text;
+    word.style.left = `${30 + Math.random() * 40}%`;
+    word.style.bottom = `-50px`;
+    document.body.appendChild(word);
+    setTimeout(() => word.remove(), 5000);
+  }
+
+  // Surprise button
+  const surpriseBtn = document.getElementById("surpriseBtn");
+  surpriseBtn.addEventListener("click", () => showFloatingText(loveMessages[dayIndex]));
+
+  // 🎧 Add quote or song player section
+  const playerBox = document.createElement("div");
+  playerBox.style.marginTop = "20px";
+  playerBox.style.textAlign = "center";
+  playerBox.style.transition = "opacity 1s ease";
+  playerBox.style.opacity = "0";
+
+  if (isQuoteDay) {
+    const quote = loveQuotes[today.getDate() % loveQuotes.length];
+    playerBox.innerHTML = `<p style="font-style:italic;color:#777;">${quote}</p>`;
+  } else {
+    const song = songs[today.getDate() % songs.length];
+    playerBox.innerHTML = `
+      <p style="color:#555;font-weight:500;">🎶 Today's Song: <b>${song.title}</b></p>
+      <iframe width="300" height="169" 
+              src="${song.url}?start=30" 
+              title="${song.title}" 
+              frameborder="0" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+              allowfullscreen>
+      </iframe>`;
+  }
+
+  document.querySelector(".container").appendChild(playerBox);
+  setTimeout(() => (playerBox.style.opacity = "1"), 1000);
+     </script>
 </body>
 </html>
