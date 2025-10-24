@@ -1,0 +1,553 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+ <title>My Heart Waits For Your Smile ❣️, Suubuu ✨</title>
+
+ <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Merriweather:ital,wght@0,400;0,700;1,400&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+ <style>
+   :root {
+     --bg: linear-gradient(135deg, #ffe6eb 0%, #fff6f8 100%);
+     --text-main: #1a1a1a;
+     --text-muted: #666;
+     --gradient: linear-gradient(135deg, #ff758c 0%, #ff7eb3 50%, #ff9770 100%);
+     --radius: 20px;
+     --shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+     --glow: 0 0 25px rgba(255, 130, 150, 0.35);
+     --frost-bg: rgba(255, 255, 255, 0.25);
+     --frost-border: rgba(255, 255, 255, 0.35);
+
+     /* New Font Variables */
+     --font-display: 'Dancing Script', cursive;
+     --font-body: 'Merriweather', serif;
+     --font-ui: 'Poppins', sans-serif;
+   }
+
+   body[data-theme="midnight"] {
+     --bg: linear-gradient(135deg, #0e1525 0%, #1a2035 100%);
+     --text-main: #e0e6f0;
+     --text-muted: #aab5c5;
+     --gradient: linear-gradient(135deg, #3a7bd5 0%, #00d2ff 100%);
+     --frost-bg: rgba(20, 28, 50, 0.35);
+     --frost-border: rgba(255, 255, 255, 0.1);
+     --glow: 0 0 25px rgba(0, 150, 255, 0.35);
+   }
+
+   body[data-theme="royal"] {
+     --bg: linear-gradient(135deg, #fff8e1 0%, #ffecd2 100%);
+     --text-main: #3a2f0b;
+     --text-muted: #6f5d28;
+     --gradient: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+     --frost-bg: rgba(255, 250, 240, 0.4);
+     --frost-border: rgba(255, 230, 180, 0.5);
+     --glow: 0 0 25px rgba(255, 180, 50, 0.35);
+   }
+
+   * { margin: 0; padding: 0; box-sizing: border-box; }
+
+   body {
+     /* Use Poppins as a fallback UI font */
+     font-family: var(--font-ui), sans-serif;
+     background: var(--bg);
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     min-height: 100vh;
+     color: var(--text-main);
+     transition: background 0.6s ease, color 0.6s ease;
+     overflow-y: auto;
+   }
+
+   .container {
+     backdrop-filter: blur(20px);
+     background: var(--frost-bg);
+     border: 1px solid var(--frost-border);
+     border-radius: var(--radius);
+     box-shadow: var(--shadow);
+     padding: 50px 40px;
+     width: 90%;
+     max-width: 600px;
+     text-align: center;
+     animation: fadeIn 1s ease;
+     transition: all 0.4s ease;
+     margin: 30px auto;
+   }
+
+   @media (max-height: 700px) and (max-width: 650px) {
+       body {
+           align-items: flex-start;
+       }
+   }
+
+
+   @keyframes fadeIn {
+     from { opacity: 0; transform: translateY(40px); }
+     to { opacity: 1; transform: translateY(0); }
+   }
+
+   h1 {
+     font-family: var(--font-display); /* New Font */
+     font-size: 3rem; /* Increased size for the new font */
+     background: var(--gradient);
+     -webkit-background-clip: text;
+     -webkit-text-fill-color: transparent;
+     font-weight: 700;
+     margin-bottom: 10px;
+   }
+
+   .subtitle {
+     font-family: var(--font-body); /* New Font */
+     font-size: 1.1rem; /* Increased size */
+     font-style: italic;
+     color: var(--text-muted);
+     margin-bottom: 35px;
+   }
+
+   /* --- DAILY CONTENT STYLE --- */
+   #dailyContent {
+     margin: 30px 0;
+     padding: 20px 25px;
+     border-radius: var(--radius);
+     background: var(--frost-bg);
+     border: 1px solid var(--frost-border);
+     box-shadow: var(--shadow);
+     text-align: left;
+     cursor: pointer;
+     transition: all 0.4s ease;
+     display: flex;
+     flex-direction: column;
+     align-items: flex-start;
+     position: relative;
+   }
+
+   #dailyContent p {
+     font-family: var(--font-body); /* New Font */
+     font-size: 1.1rem;
+     font-weight: 400; /* Regular weight for Merriweather */
+     line-height: 1.6;
+     min-height: 40px;
+   }
+
+   /* Target the message label */
+   #dailyContent p strong {
+       font-family: var(--font-display); /* New Font */
+       background: var(--gradient);
+       -webkit-background-clip: text;
+       -webkit-text-fill-color: transparent;
+       font-weight: 700;
+       font-size: 1.8rem; /* Increased size */
+   }
+
+   /* Styles for the "Tap to Reveal" state */
+   .tap-to-reveal #dailyMessage {
+     filter: blur(4px);
+     transition: filter 0.3s ease;
+     font-style: italic;
+     color: var(--text-muted);
+     user-select: none;
+   }
+
+   /* Style for revealed state */
+   #dailyContent.revealed #dailyMessage {
+     filter: blur(0);
+     font-style: normal;
+     color: var(--text-main);
+   }
+
+   /* Subtle pulsing animation to draw attention */
+   @keyframes pulse {
+       0% { transform: scale(1); box-shadow: var(--shadow); }
+       50% { transform: scale(1.01); box-shadow: var(--glow); }
+       100% { transform: scale(1); box-shadow: var(--shadow); }
+   }
+
+   .tap-to-reveal {
+       animation: pulse 4s infinite ease-in-out;
+   }
+
+   /* --- EMOJI STYLE --- */
+   #loveEmojiContainer {
+       display: flex;
+       justify-content: center; /* Center the emojis horizontally */
+       width: 100%;
+       margin-top: 15px;
+       line-height: 1;
+   }
+
+   .rotating-emoji {
+       font-size: 2.5rem;
+       padding: 0 5px; /* Space between emojis */
+       transition: transform 0.3s ease;
+   }
+   /* --- End EMOJI STYLE --- */
+
+
+   #countdown {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     flex-wrap: wrap;
+     gap: 20px;
+     margin-bottom: 30px;
+   }
+
+   .time-box {
+     border-radius: var(--radius);
+     width: 120px;
+     height: 120px;
+     background: rgba(255, 255, 255, 0.4);
+     backdrop-filter: blur(10px);
+     border: 1px solid rgba(255, 255, 255, 0.3);
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     justify-content: center;
+     box-shadow: var(--shadow);
+     transition: transform 0.3s ease, box-shadow 0.3s ease;
+   }
+
+   body[data-theme="midnight"] .time-box {
+     background: rgba(20, 28, 50, 0.5);
+     border: 1px solid rgba(255, 255, 255, 0.15);
+   }
+
+   body[data-theme="royal"] .time-box {
+     background: rgba(255, 249, 230, 0.6);
+     border: 1px solid rgba(255, 200, 100, 0.4);
+   }
+
+   .time-box:hover {
+     transform: translateY(-5px);
+     box-shadow: var(--glow);
+   }
+
+   .time-box span {
+     font-family: var(--font-ui); /* UI font for numbers */
+     font-size: 2.5rem;
+     font-weight: 700;
+     background: var(--gradient);
+     -webkit-background-clip: text;
+     -webkit-text-fill-color: transparent;
+     margin-bottom: 5px;
+   }
+
+   .time-box small {
+     font-family: var(--font-ui); /* UI font for labels */
+     color: var(--text-muted);
+     font-size: 0.85rem;
+     letter-spacing: 1px;
+     text-transform: uppercase;
+   }
+
+   .btn {
+     margin-top: 10px;
+     padding: 12px 28px;
+     border: none;
+     border-radius: 40px;
+     font-family: var(--font-ui); /* UI font for button */
+     font-weight: 600;
+     background: var(--gradient);
+     color: #fff;
+     cursor: pointer;
+     box-shadow: 0 8px 20px rgba(255, 120, 150, 0.4);
+     transition: all 0.3s ease;
+   }
+
+   .btn:hover {
+     transform: translateY(-3px);
+     box-shadow: 0 10px 25px rgba(255, 120, 150, 0.5);
+   }
+
+   .theme-toggle {
+     position: fixed;
+     top: 20px;
+     right: 20px;
+     background: var(--gradient);
+     border: none;
+     border-radius: 50%;
+     width: 50px;
+     height: 50px;
+     color: #fff;
+     font-size: 1.3rem;
+     box-shadow: var(--glow);
+     cursor: pointer;
+     transition: transform 0.3s ease;
+     z-index: 1000;
+   }
+
+   .theme-toggle:hover { transform: rotate(20deg) scale(1.1); }
+
+   .confetti {
+     position: fixed;
+     top: 0;
+     left: 0;
+     width: 100%;
+     height: 100%;
+     pointer-events: none;
+     overflow: hidden;
+     z-index: 9999;
+   }
+
+   .confetti .piece {
+     position: absolute;
+     width: 10px;
+     height: 16px;
+     opacity: 0;
+     transform: translateY(-10vh) rotate(0deg);
+     animation: fall linear forwards;
+   }
+
+   @keyframes fall {
+     0% { opacity: 1; transform: translateY(-10vh) rotate(0deg); }
+     100% { opacity: 1; transform: translateY(110vh) rotate(720deg); }
+   }
+
+   /* --- Mobile Responsiveness --- */
+   @media (max-width: 500px) {
+     h1 { font-size: 2.2rem; } /* Adjusted for Dancing Script */
+     .subtitle { font-size: 1rem; }
+     .container {
+       padding: 30px 20px;
+       margin: 20px auto;
+     }
+     #countdown { gap: 10px; }
+     .time-box {
+       width: 85px;
+       height: 85px;
+       padding: 10px;
+     }
+     .time-box span { font-size: 1.8rem; }
+     .time-box small { font-size: 0.7rem; }
+
+     #dailyContent p { font-size: 1rem; }
+     #dailyContent p strong { font-size: 1.5rem; }
+   }
+ </style>
+</head>
+<body data-theme="romantic">
+
+ <button class="theme-toggle" id="themeBtn">💖</button>
+
+ <main class="container">
+   <h1>My Heart Waits For Your Smile, Suubuu ✨</h1>
+   <p class="subtitle">Every heart beat is a tick closer to you. ⏳❤️</p>
+
+   <section id="dailyContent" class="tap-to-reveal" onclick="revealMessage()">
+       <p><strong>Today's Surprise Message:</strong><br><span id="dailyMessage">Tap here to reveal your personalized thought! (42 Days Remaining)</span></p>
+
+       <div id="loveEmojiContainer">
+           <span id="emoji1" class="rotating-emoji">💖</span>
+           <span id="emoji2" class="rotating-emoji">💕</span>
+           <span id="emoji3" class="rotating-emoji">😍</span>
+       </div>
+   </section>
+   <section id="countdown">
+     <div class="time-box"><span id="days">0</span><small>Days</small></div>
+     <div class="time-box"><span id="hours">0</span><small>Hours</small></div>
+     <div class="time-box"><span id="minutes">0</span><small>Minutes</small></div>
+     <div class="time-box"><span id="seconds">0</span><small>Seconds</small></div>
+   </section>
+
+   <div class="confetti" id="confettiContainer"></div>
+ </main>
+
+ <script>
+   // NOTE: Date is set to Dec 5, 2025 based on your uploaded file.
+   const countDownDate = new Date("Dec 5, 2025 11:10:00").getTime();
+   const confettiContainer = document.getElementById("confettiContainer");
+   const dailyContentSection = document.getElementById("dailyContent");
+   const dailyMessageElement = document.getElementById("dailyMessage");
+   const themeBtn = document.getElementById("themeBtn");
+   const themes = ["romantic", "midnight", "royal"];
+   let current = 0;
+   let daysLeftGlobal = 0;
+
+   // --- EMOJI ROTATION LOGIC: Expanded List for 3 Emojis ---
+   // Expanded list of romantic and cute emojis
+   const loveEmojis = [
+       "💖", "💕", "😍", "😘", "❣️", "❤️", "💘", "💞", "💓", "🥰",
+       "😻", "😊", "✨", "💋", "🌟", "🌹", "💌", "👩‍❤️‍💋‍👨", "🫂", "💫"
+   ];
+
+   const emojiElements = [
+       document.getElementById("emoji1"),
+       document.getElementById("emoji2"),
+       document.getElementById("emoji3")
+   ];
+   let emojiIndex = 0;
+
+   function rotateEmoji() {
+       // Shuffle the list to ensure better random selection
+       const shuffledEmojis = [...loveEmojis].sort(() => 0.5 - Math.random());
+
+       // Apply the first three unique emojis from the shuffled list
+       for(let i = 0; i < emojiElements.length; i++) {
+           const emoji = shuffledEmojis[(emojiIndex + i) % loveEmojis.length];
+           const el = emojiElements[i];
+
+           // Add a slight transformation effect
+           el.style.transform = 'rotate(' + (Math.random() * 10 - 5) + 'deg) scale(1.1)';
+           el.textContent = emoji;
+
+           // Reset transform after a short delay
+           setTimeout(() => {
+               el.style.transform = 'rotate(0deg) scale(1)';
+           }, 100);
+       }
+
+       // Move to the next starting point in the main emoji list
+       emojiIndex = (emojiIndex + 1) % loveEmojis.length;
+   }
+
+   // Start emoji rotation every 0.8 seconds
+   setInterval(rotateEmoji, 800);
+   // -------------------------------------------
+
+
+   // --- DAILY CONTENT ARRAY (42 Personalized Messages without bolding) ---
+   const dailyContent = [
+       // DAY 42: Updated heartfelt message (index 0)
+       "My only wish is for your happiness, Suubuu. You are incredibly beautiful, inside and out—the kind of person I want to cherish, protect, and hold close for a lifetime. ❤️",
+       // DAY 41: Updated heartfelt message (index 1)
+       "More than anything, Suubuu, I just want you to be truly happy. ✨ You are incredibly beautiful, not just on the outside, but radiating from within. You're someone precious, someone I want to cherish, protect, and keep close forever. ❤️",
+       "Today, I celebrate your brilliant mind. Your dedication to academics is inspiring, and I'm incredibly proud of your intelligence.",
+       "I cherish every memory, every small moment, every conversation we've shared. You are worth preserving for life.",
+       "I know how much you enjoy writing articles. I can't wait to hear your latest thoughts and insights when you are here.",
+       "You have a rare gift for deep thinking. I love our conversations where you explore complex ideas—it makes me understand the world better.",
+       "Your ability to handle every situation with grace and clear thought is a quiet superpower. My admiration for you grows daily.",
+       "Just knowing that you understand me so well makes the distance bearable. You see the real me, and that connection is everything.",
+       "Today's thought is simple: you are very pretty. No filter, no fancy words needed—just a breathtaking sight.",
+       "Thinking about your hidden talent for writing beautiful poems. They are a window to your sensitive and artistic soul.",
+       "Your voice is the most comforting sound. I still replay the last message you sent. The countdown to hearing you sing in person is on!",
+       "Every step of this journey confirms that I can preserve you for life. You are the treasure I want to protect and cherish forever.",
+       "We're down to a month! My heart skips a beat knowing I'll soon see your cute smile in person again. 🥰",
+       "Your multi-talented nature never ceases to amaze me. Whether it's academics or creativity, you excel at everything you touch.",
+       "Remembering our first encounter—I instantly knew you were special. Gorgeous doesn't even begin to cover your presence.",
+       "I'm planning a quiet, beautiful moment for us, just so I can listen to your melodious voice without any distractions.",
+       "Your intelligence is magnetic. I am always looking forward to learning something new from you every time we talk.",
+       "I’ve been practicing being a better listener, knowing how much I rely on the fact that you understand me well.",
+       "I'm thinking of all the new articles you’ll read and write while you're away. You have a good mind for writing that I adore.",
+       "The knowledge that you know how to handle every situation gives me peace. You are my anchor, even from a distance.",
+       "We’re halfway! My heart is full of the cherished moments we already have, and excitement for the ones coming soon. 💞",
+       "Your deep thinking inspires my own thoughts. I feel more purposeful and centered because of your perspective.",
+       "I can’t wait to dedicate a song to you when we meet. You who sings well deserve the best soundtrack to your return.",
+       "When you combine pretty and intelligent, you get the most amazing person I know. You are truly the full package.",
+       "Today's thought is about your caring nature. You use your deep understanding to make others feel seen and valued.",
+       "I've started organizing the gifts I got for you. You deserve every beautiful thing in the world, my gorgeous love.",
+       "I'm compiling a list of difficult questions just to watch your brilliant mind work! (Just kidding... mostly!)",
+       "Your unique gift for writing articles and poems makes the world a richer place. Thank you for sharing your gifts.",
+       "Two weeks left! We are so close to adding more precious memories to our vault of cherished moments.",
+       "I love that you are multi-talented. It means every day with you is a new adventure, a new facet of you to discover.",
+       "I think about how cute you are when you are focused on your studies or writing. That dedication is beautiful.",
+       "Your ability to be an excellent student and still be the kindest person I know is truly remarkable. Go you!",
+       "Single digits! I’m preparing a special gift that I hope will be worthy of someone I want to preserve for life.",
+       "My favorite words are the ones you sing to me. They are just as beautiful as your everyday sweet voice.",
+       "You understand me better than anyone. That safety and comfort is the most precious thing I hold.",
+       "One week until I can hold the hand of the person who knows how to handle every situation—including my over-excitement right now!",
+       "Thinking about that perfect balance of pretty and intelligent you possess. It’s what makes you so captivating.",
+       "Your melodious voice will be the first sound I want to hear clearly, without a phone screen between us.",
+       "I've been reflecting on how multitalented you are. You inspire me to pursue my own passions more fiercely.",
+       "Just three days until I'm reunited with my gorgeous, deep-thinking love. Every thought is about you.",
+       "Tomorrow, I will be dreaming of your cute, pretty face. The wait is nearly over, my love!",
+       "Last day! The best article, the most beautiful poem, the most challenging academic topic—none are as perfect as you. See you soon! ❤️"
+   ];
+   // ---------------------------------
+
+   themeBtn.addEventListener("click", () => {
+     current = (current + 1) % themes.length;
+     const newTheme = themes[current];
+     document.body.setAttribute("data-theme", newTheme);
+     themeBtn.textContent = newTheme === "romantic" ? "💖" :
+                            newTheme === "midnight" ? "🌌" : "👑";
+   });
+
+   // --- FUNCTION TO HANDLE MESSAGE REVEAL ---
+   window.revealMessage = function() {
+       if (!dailyContentSection.classList.contains('revealed')) {
+           const daysLeft = daysLeftGlobal;
+            // Calculate the correct index: 42 days left = index 0. 1 day left = index 41.
+           const index = 42 - daysLeft;
+
+           if (daysLeft >= 1 && daysLeft <= 42) {
+               dailyMessageElement.textContent = dailyContent[index];
+           } else if (daysLeft < 1) {
+               dailyMessageElement.textContent = "The moment is here! Go meet your Suubuu! 🎉";
+           }
+
+           // Just reveal the content
+           dailyContentSection.classList.add('revealed');
+           dailyContentSection.classList.remove('tap-to-reveal');
+       }
+   }
+   // ---------------------------------------------
+
+   function updateCountdown() {
+     const now = new Date().getTime();
+     const distance = countDownDate - now;
+     const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+     const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+     const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+     const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+     daysLeftGlobal = days;
+
+     document.getElementById("days").textContent = days;
+     document.getElementById("hours").textContent = hours;
+     document.getElementById("minutes").textContent = minutes;
+     document.getElementById("seconds").textContent = seconds;
+
+     if (daysLeftGlobal !== daysLeftGlobal_old) {
+         // Reset the daily message/state on a new day
+         dailyContentSection.classList.remove('revealed');
+         dailyContentSection.classList.add('tap-to-reveal');
+
+         if (days >= 1 && days <= 42) {
+           dailyMessageElement.textContent = `Tap here to reveal your personalized thought! (${days} Days Remaining)`;
+         } else {
+           dailyMessageElement.textContent = `Tap here to reveal your final message!`;
+         }
+     }
+     daysLeftGlobal_old = daysLeftGlobal;
+
+     if (distance < 0) {
+       clearInterval(timer);
+       showCelebration();
+     }
+   }
+
+   let daysLeftGlobal_old = -1;
+   updateCountdown();
+   const timer = setInterval(updateCountdown, 1000);
+
+   function showCelebration() {
+     document.querySelector('.container').innerHTML = `
+       <div class="finished">
+         <h2>The Wait is Over! 🎉</h2>
+         <p>Time to meet Suubuu 💖</p>
+         <button class="btn" onclick="location.reload()">Restart Countdown</button>
+       </div>
+     `;
+     createConfetti(100);
+   }
+
+   function createConfetti(count = 60) {
+     const colors = ["#ff7eb3", "#ff758c", "#ff9770", "#ffd194", "#fbc2eb", "#a18cd1"];
+     for (let i = 0; i < count; i++) {
+       const el = document.createElement("div");
+       el.className = "piece";
+       const w = 8 + Math.random() * 12;
+       el.style.width = w + "px";
+       el.style.height = (w * 1.2) + "px";
+       el.style.left = Math.random() * 100 + "%";
+       el.style.background = colors[Math.floor(Math.random() * colors.length)];
+       el.style.opacity = 0.9;
+       el.style.animationDuration = (2.8 + Math.random() * 2.4) + "s";
+       el.style.animationDelay = (Math.random() * 0.5) + "s";
+       confettiContainer.appendChild(el);
+     }
+   }
+ </script>
+</body>
+</html>
