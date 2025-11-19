@@ -1,0 +1,1031 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+ <title>My Heart Waits For You, Suubuu ✨</title>
+
+
+ <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Lora:ital,wght@0,400..700;1,400..700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+
+ <style>
+   :root {
+     --bg: linear-gradient(135deg, #ffe6eb 0%, #fff6f8 100%);
+     --text-main: #1a1a1a;
+     --text-muted: #666;
+     --gradient: linear-gradient(135deg, #ff758c 0%, #ff7eb3 50%, #ff9770 100%);
+     --radius: 20px;
+     --shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+     --glow: 0 0 25px rgba(255, 130, 150, 0.35);
+     --frost-bg: rgba(255, 255, 255, 0.25);
+     --frost-border: rgba(255, 255, 255, 0.35);
+     --correct-bg: rgba(110, 231, 183, 0.6); 
+     --incorrect-bg: rgba(255, 130, 150, 0.6);
+
+
+     /* Romantic Fonts */
+     --font-display: 'Great Vibes', cursive;
+     --font-body: 'Lora', serif;
+   }
+
+
+   body[data-theme="midnight"] {
+     --bg: linear-gradient(135deg, #0e1525 0%, #1a2035 100%);
+     --text-main: #e0e6f0;
+     --text-muted: #aab5c5;
+     --gradient: linear-gradient(135deg, #3a7bd5 0%, #00d2ff 100%);
+     --frost-bg: rgba(20, 28, 50, 0.35);
+     --frost-border: rgba(255, 255, 255, 0.1);
+     --glow: 0 0 25px rgba(0, 150, 255, 0.35);
+     --correct-bg: rgba(45, 200, 150, 0.5);
+     --incorrect-bg: rgba(200, 60, 100, 0.5);
+   }
+
+
+   body[data-theme="royal"] {
+     --bg: linear-gradient(135deg, #fff8e1 0%, #ffecd2 100%);
+     --text-main: #3a2f0b;
+     --text-muted: #6f5d28;
+     --gradient: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+     --frost-bg: rgba(255, 250, 240, 0.4);
+     --frost-border: rgba(255, 230, 180, 0.5);
+     --glow: 0 0 25px rgba(255, 180, 50, 0.35);
+     --correct-bg: rgba(210, 255, 210, 0.7);
+     --incorrect-bg: rgba(255, 200, 200, 0.7);
+   }
+
+
+   * { margin: 0; padding: 0; box-sizing: border-box; }
+
+
+   body {
+     font-family: 'Poppins', sans-serif;
+     background: var(--bg);
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     min-height: 100vh;
+     color: var(--text-main);
+     transition: background 0.6s ease, color 0.6s ease;
+     overflow-y: auto;
+     overflow-x: hidden;
+   }
+
+
+   .container {
+     backdrop-filter: blur(20px);
+     background: var(--frost-bg);
+     border: 1px solid var(--frost-border);
+     border-radius: var(--radius);
+     box-shadow: var(--shadow);
+     padding: 50px 40px;
+     width: 90%;
+     max-width: 600px;
+     text-align: center;
+     animation: fadeIn 1s ease;
+     transition: all 0.4s ease;
+     margin: 30px auto;
+     z-index: 10;
+     position: relative;
+   }
+   
+   @keyframes fadeIn {
+       from { opacity: 0; transform: translateY(20px); }
+       to { opacity: 1; transform: translateY(0); }
+   }
+
+
+   h1 {
+     font-family: var(--font-display);
+     font-size: 4.0rem;
+     background: var(--gradient);
+     -webkit-background-clip: text;
+     -webkit-text-fill-color: transparent;
+     font-weight: 400;
+     margin-bottom: 10px;
+   }
+
+
+   .subtitle {
+     font-family: var(--font-body);
+     font-size: 1.1rem;
+     font-style: italic;
+     color: var(--text-muted);
+     margin-bottom: 35px;
+   }
+
+
+   /* --- DAILY CONTENT & QUIZ STYLE --- */
+   #dailyContent {
+     margin: 30px 0 10px;
+     padding: 20px 25px;
+     border-radius: var(--radius);
+     background: var(--frost-bg);
+     border: 1px solid var(--frost-border);
+     box-shadow: var(--shadow);
+     text-align: left;
+     cursor: pointer;
+     transition: all 0.4s ease;
+     position: relative;
+     min-height: 140px; 
+   }
+   
+   #messageBody {
+       font-family: var(--font-body);
+       font-size: 1.1rem;
+       font-weight: 400;
+       line-height: 1.6;
+       min-height: 40px;
+       transition: all 0.3s ease;
+   }
+
+
+   #dailyContent strong {
+       font-family: var(--font-display);
+       background: var(--gradient);
+       -webkit-background-clip: text;
+       -webkit-text-fill-color: transparent;
+       font-weight: 400;
+       font-size: 2.2rem;
+       display: block; 
+       margin-bottom: 5px;
+   }
+
+
+   .message-footer {
+       font-family: 'Poppins', sans-serif;
+       text-align: center;
+       margin-top: 20px;
+       font-size: 2.5rem; 
+       color: var(--text-main);
+   }
+
+
+   /* Tap to Reveal Styles */
+   .tap-to-reveal #messageBody { filter: blur(4px); transition: filter 0.3s ease; font-style: italic; color: var(--text-muted); user-select: none; }
+   #dailyContent.revealed #messageBody { filter: blur(0); font-style: normal; color: var(--text-main); }
+   @keyframes pulse { 0% { transform: scale(1); box-shadow: var(--shadow); } 50% { transform: scale(1.01); box-shadow: var(--glow); } 100% { transform: scale(1); box-shadow: var(--shadow); } }
+   .tap-to-reveal { animation: pulse 4s infinite ease-in-out; }
+
+
+
+
+   /* --- QUIZ STYLES --- */
+   /* 1. Progress Bar Styles */
+   .progress-container {
+       width: 100%;
+       height: 8px;
+       background-color: rgba(0,0,0,0.1);
+       border-radius: 10px;
+       margin-bottom: 20px;
+       overflow: hidden;
+   }
+   .progress-bar {
+       height: 100%;
+       width: 0%;
+       background: var(--gradient);
+       transition: width 0.5s ease;
+       border-radius: 10px;
+   }
+
+
+   /* 2. Shake Animation */
+   @keyframes shake {
+       0%, 100% { transform: translateX(0); }
+       10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+       20%, 40%, 60%, 80% { transform: translateX(5px); }
+   }
+   .shake-effect {
+       animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+   }
+
+
+   .quiz-question {
+       font-family: 'Poppins', sans-serif;
+       font-size: 1.1rem;
+       font-weight: 600;
+       margin-bottom: 15px;
+       color: var(--text-main);
+   }
+   .quiz-options {
+       display: flex;
+       flex-direction: column;
+       gap: 10px;
+   }
+   .quiz-option {
+       font-family: 'Poppins', sans-serif;
+       font-size: 0.95rem;
+       background: var(--frost-bg);
+       border: 1px solid var(--frost-border);
+       border-radius: 10px;
+       padding: 12px;
+       cursor: pointer;
+       transition: all 0.2s ease;
+       text-align: left;
+       color: var(--text-main);
+   }
+   .quiz-option:hover {
+       background: rgba(255, 255, 255, 0.5);
+       transform: translateX(5px);
+   }
+   .quiz-option.correct {
+       background: var(--correct-bg);
+       border-color: transparent;
+       font-weight: 600;
+   }
+   .quiz-option.incorrect {
+       background: var(--incorrect-bg);
+       border-color: transparent;
+       font-weight: 600;
+   }
+   .quiz-option:disabled {
+       cursor: not-allowed;
+       opacity: 0.7;
+   }
+   
+   #quizFeedback {
+       font-family: 'Poppins', sans-serif;
+       font-weight: 600;
+       margin-top: 15px;
+       font-size: 1rem;
+       min-height: 20px;
+   }
+   #hintButton {
+       font-family: 'Poppins', sans-serif;
+       font-size: 0.8rem;
+       font-style: italic;
+       color: var(--text-muted);
+       background: none;
+       border: none;
+       cursor: pointer;
+       margin-top: 10px;
+       padding: 5px;
+   }
+   #hintButton:hover {
+       text-decoration: underline;
+   }
+
+
+   /* --- GIFT BOX STYLES (New) --- */
+   .gift-box-wrapper {
+       text-align: center;
+       padding: 20px;
+       cursor: pointer;
+       animation: floatGift 3s ease-in-out infinite;
+   }
+   .gift-icon {
+       font-size: 5rem;
+       background: var(--gradient);
+       -webkit-background-clip: text;
+       -webkit-text-fill-color: transparent;
+       filter: drop-shadow(0 5px 15px rgba(255, 100, 150, 0.4));
+       transition: transform 0.3s ease;
+   }
+   .gift-box-wrapper:hover .gift-icon {
+       transform: scale(1.1) rotate(5deg);
+   }
+   .click-to-open {
+       font-family: 'Poppins', sans-serif;
+       margin-top: 10px;
+       font-size: 0.9rem;
+       color: var(--text-muted);
+       animation: pulseText 2s infinite;
+   }
+   @keyframes floatGift {
+       0% { transform: translateY(0px); }
+       50% { transform: translateY(-15px); }
+       100% { transform: translateY(0px); }
+   }
+   @keyframes pulseText {
+       0% { opacity: 0.6; }
+       50% { opacity: 1; }
+       100% { opacity: 0.6; }
+   }
+
+
+   /* --- REWARD STYLES --- */
+   .reward-container {
+       text-align: center;
+       animation: zoomIn 0.5s ease;
+   }
+   @keyframes zoomIn {
+       from { transform: scale(0.8); opacity: 0; }
+       to { transform: scale(1); opacity: 1; }
+   }
+
+
+   .reward-title {
+       font-family: var(--font-display);
+       font-size: 2.5rem;
+       background: var(--gradient);
+       -webkit-background-clip: text;
+       -webkit-text-fill-color: transparent;
+       margin-bottom: 10px;
+   }
+   .reward-subtitle {
+       font-family: var(--font-body);
+       font-size: 1.1rem;
+       color: var(--text-main);
+       margin-bottom: 15px;
+   }
+   
+   .voucher-details {
+       font-family: 'Poppins', sans-serif;
+       background: var(--frost-bg);
+       border: 1px solid var(--frost-border);
+       border-radius: 10px;
+       padding: 15px;
+       text-align: left;
+       margin-bottom: 15px;
+   }
+   .voucher-details img {
+       width: 100%;
+       max-width: 250px;
+       border-radius: 10px;
+       margin-bottom: 15px;
+       display: block;
+       margin-left: auto;
+       margin-right: auto;
+   }
+    .voucher-details p {
+       font-size: 0.95rem;
+       color: var(--text-main);
+       margin-bottom: 10px;
+       line-height: 1.5;
+   }
+   .voucher-details p strong {
+       font-family: 'Poppins', sans-serif;
+       font-size: 1.1rem;
+       font-weight: 700;
+       color: var(--text-main);
+       -webkit-text-fill-color: initial; 
+       background: none; 
+       display: inline;
+   }
+   .code-value {
+       font-family: 'Poppins', sans-serif;
+       font-weight: 600;
+       font-size: 1.1rem;
+       background: rgba(0,0,0,0.05);
+       padding: 3px 8px;
+       border-radius: 5px;
+       user-select: all; 
+       display: inline-block;
+   }
+   body[data-theme="midnight"] .code-value {
+       background: rgba(255,255,255,0.1);
+   }
+
+
+   #copyButton {
+       font-family: 'Poppins', sans-serif;
+       font-size: 0.9rem;
+       font-weight: 600;
+       color: #fff;
+       background: var(--gradient);
+       border: none;
+       border-radius: 10px;
+       padding: 10px 20px;
+       cursor: pointer;
+       box-shadow: var(--glow);
+       transition: all 0.3s ease;
+       margin-top: 10px;
+   }
+   #copyButton:hover {
+       transform: scale(1.05);
+   }
+
+
+   /* --- Theme & Music Button Styles --- */
+   #musicControlBtn, .theme-toggle {
+       font-family: 'Poppins', sans-serif;
+       position: fixed;
+       background: var(--gradient);
+       border: none;
+       border-radius: 50%;
+       width: 50px;
+       height: 50px;
+       color: #fff;
+       font-size: 1.3rem;
+       box-shadow: var(--glow);
+       cursor: pointer;
+       transition: all 0.3s ease;
+       z-index: 1000;
+       display: flex;
+       justify-content: center;
+       align-items: center;
+   }
+   .theme-toggle { top: 20px; right: 20px; }
+   .theme-toggle:hover { transform: rotate(20deg) scale(1.1); }
+   #musicControlBtn { bottom: 20px; right: 20px; }
+   #musicControlBtn:hover { transform: scale(1.1); }
+
+
+   /* --- Love Bubbles --- */
+   #bubbles-container {
+       position: fixed;
+       top: 0;
+       left: 0;
+       width: 100%;
+       height: 100%;
+       pointer-events: none;
+       overflow: hidden;
+       z-index: 100; 
+   }
+
+
+   .bubble {
+       position: absolute;
+       bottom: -50px;
+       width: 20px;
+       height: 20px;
+       background: var(--gradient);
+       border-radius: 5px;
+       opacity: 0;
+       animation: animateBubble linear infinite;
+       transform: rotate(-45deg);
+   }
+
+
+   .bubble::before,
+   .bubble::after {
+       content: '';
+       position: absolute;
+       width: 20px;
+       height: 20px;
+       border-radius: 50%;
+       background: var(--gradient);
+   }
+
+
+   .bubble::before { top: -10px; left: 0; }
+   .bubble::after { top: 0; left: 10px; }
+
+
+   @keyframes animateBubble {
+       0% { transform: translateY(0) translateX(0) rotate(-45deg); opacity: 0.8; }
+       100% { transform: translateY(-100vh) translateX(calc(100px * (var(--drift) - 0.5) * 2)) rotate(315deg); opacity: 0; }
+   }
+
+
+   /* Countdown Styles */
+   #countdown { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 20px; margin-bottom: 30px; }
+   .time-box { border-radius: var(--radius); width: 120px; height: 120px; background: rgba(255, 255, 255, 0.4); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.3); display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: var(--shadow); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+   body[data-theme="midnight"] .time-box { background: rgba(20, 28, 50, 0.5); border: 1px solid rgba(255, 255, 255, 0.15); }
+   body[data-theme="royal"] .time-box { background: rgba(255, 249, 230, 0.6); border: 1px solid rgba(255, 200, 100, 0.4); }
+   .time-box:hover { transform: translateY(-5px); box-shadow: var(--glow); }
+
+
+   .time-box span {
+       font-family: 'Poppins', sans-serif;
+       font-size: 2.5rem;
+       font-weight: 700;
+       background: var(--gradient);
+       -webkit-background-clip: text;
+       -webkit-text-fill-color: transparent;
+       margin-bottom: 5px;
+   }
+   .time-box small {
+       font-family: 'Poppins', sans-serif;
+       color: var(--text-muted);
+       font-size: 0.85rem;
+       letter-spacing: 1px;
+       text-transform: uppercase;
+   }
+
+
+   /* Button Style */
+   .btn {
+       font-family: 'Poppins', sans-serif;
+       font-size: 1rem;
+       font-weight: 600;
+       color: #fff;
+       background: var(--gradient);
+       border: none;
+       border-radius: 10px;
+       padding: 12px 24px;
+       margin-top: 20px;
+       cursor: pointer;
+       box-shadow: var(--glow);
+       transition: all 0.3s ease;
+   }
+   .btn:hover {
+       transform: scale(1.05);
+       box-shadow: var(--shadow);
+   }
+
+
+   /* Confetti Styles */
+   .confetti {
+       position: fixed;
+       top: 0;
+       left: 0;
+       width: 100%;
+       height: 100%;
+       pointer-events: none;
+       overflow: hidden;
+       z-index: 2000;
+   }
+   .piece {
+       position: absolute;
+       top: -10px; 
+       opacity: 0;
+       animation: fall 3.5s linear infinite;
+   }
+   @keyframes fall {
+       0% {
+           transform: translateY(-20px) rotate(0deg);
+           opacity: 0.8;
+       }
+       100% {
+           transform: translateY(105vh) rotate(720deg);
+           opacity: 0;
+       }
+   }
+
+
+   /* Mobile Responsiveness */
+   @media (max-width: 500px) {
+     h1 { font-size: 3.0rem; }
+     #dailyContent strong { font-size: 2.0rem; }
+     .message-footer { font-size: 2.0rem; }
+     .time-box { width: 85px; height: 85px; padding: 10px; }
+     .time-box span { font-size: 1.8rem; }
+     .time-box small { font-size: 0.7rem; }
+     .theme-toggle { top: 15px; right: 15px; width: 45px; height: 45px; }
+     #musicControlBtn { bottom: 15px; right: 15px; width: 45px; height: 45px; }
+     .bubble { width: 15px; height: 15px; }
+     .bubble::before, .bubble::after { width: 15px; height: 15px; }
+     .bubble::before { top: -7px; }
+     .bubble::after { left: 7px; }
+     @keyframes animateBubble {
+         0% { transform: translateY(0) translateX(0) rotate(-45deg); opacity: 0.8; }
+         100% { transform: translateY(-100vh) translateX(calc(80px * (var(--drift) - 0.5) * 2)) rotate(315deg); opacity: 0; }
+     }
+   }
+ </style>
+</head>
+<body data-theme="romantic">
+
+
+ <button class="theme-toggle" id="themeBtn">💖</button>
+ <button id="musicControlBtn"><i class="fas fa-play"></i></button>
+ 
+ <main class="container">
+   <h1>My Heart Waits For You, Suubuu ✨</h1>
+   <p class="subtitle">Every beat of my heart is a tick closer to you. ⏳❤️</p>
+
+
+   <section id="dailyContent" class="tap-to-reveal" onclick="revealMessage()">
+       <strong>Today's Surprise Message:</strong>
+       <div id="messageBody">Tap here to reveal your personalized thought!</div>
+   </section>
+   
+   <p id="emojiFooter" class="message-footer">💕💖❣️</p>
+   <section id="countdown">
+     <div class="time-box"><span id="days">0</span><small>Days</small></div>
+     <div class="time-box"><span id="hours">0</span><small>Hours</small></div>
+     <div class="time-box"><span id="minutes">0</span><small>Minutes</small></div>
+     <div class="time-box"><span id="seconds">0</span><small>Seconds</small></div>
+   </section>
+
+
+   <div class="confetti" id="confettiContainer"></div>
+ </main>
+
+
+ <div id="bubbles-container"></div>
+
+
+ <audio id="backgroundMusic" src="sway.mp3" loop preload="auto"></audio>
+
+
+ <script>
+   // --- Constants and Globals ---
+   const countDownDate = new Date("Dec 5, 2025 11:10:00").getTime();
+   const dailyContentSection = document.getElementById("dailyContent");
+   const messageBodyElement = document.getElementById("messageBody");
+   const themeBtn = document.getElementById("themeBtn");
+   const backgroundMusic = document.getElementById("backgroundMusic");
+   const musicControlBtn = document.getElementById("musicControlBtn");
+   const bubblesContainer = document.getElementById("bubbles-container");
+   const confettiContainer = document.getElementById("confettiContainer");
+   const emojiFooterElement = document.getElementById("emojiFooter");
+   
+   const themes = ["romantic", "midnight", "royal"];
+   const rotatingEmojis = ["💕💖❣️", "✨💞❤️", "😘🥰😍"];
+   let emojiIndex = 0;
+   let currentThemeIndex = 0;
+   let daysLeftGlobal = 0;
+   let daysLeftGlobal_old = -1;
+
+
+   // --- SOUND EFFECTS (New) ---
+   // Using hosted URLs for reliability
+   const soundCorrect = new Audio('https://www.soundjay.com/buttons/sounds/button-09.mp3');
+   const soundWrong = new Audio('https://www.soundjay.com/buttons/sounds/button-10.mp3');
+   const soundUnwrap = new Audio('https://www.soundjay.com/misc/sounds/magic-chime-01.mp3');
+
+
+   const startDay = 16; 
+   const quizDay = 15; 
+   let currentQuestionIndex = 0;
+   let quizActive = false;
+   
+   let quizPassed = localStorage.getItem("suubuu_quiz_passed") === "true";
+   
+   const quizData = [
+       {
+           question: "Why did KK initially object to calling Shubhangi by her nickname, Sakshi?",
+           options: [
+               "He thought Shubhangi was a more formal and appropriate name.", 
+               "It was the name of his boss, whom he did not like.", 
+               "She told him that only her close friends called her Sakshi.", 
+               "He wanted to choose a unique nickname for her himself." 
+           ],
+           correct: 1,
+           hint: "Consider the professional relationship KK mentioned during their conversation about names."
+       },
+       {
+           question: "Which shared interest led Suubuu to say KK was becoming 'irresistible'?",
+           options: [
+               "His deep understanding of psychological thrillers.", 
+               "Their mutual love for the TV show Sherlock.", 
+               "His appreciation for animated movies.", 
+               "Their preference for science fiction movies like Interstellar." 
+           ],
+           correct: 2, 
+           hint: "This compliment came after she mentioned that many people ridicule her for liking a particular film genre."
+       },
+       {
+           question: "When KK shared a piece of his personal writing, what impressed him most about Suubuu's reaction?",
+           options: [
+               "She immediately offered to share her own poetry in return.", 
+               "She praised his use of 'heavy words' and complex vocabulary.", 
+               "She was the first person to accurately understand its deep, abstract meaning.", 
+               "She analyzed it based on philosophical texts she had read." 
+           ],
+           correct: 2, 
+           hint: "KK's reaction highlighted how unique her level of comprehension was."
+       }
+   ];
+
+
+   const dailyContent = [
+       "I've started organizing the gifts I got for you. You deserve every beautiful thing in the world, my gorgeous love. It's going to be a perfect day. 🎁", 
+       "I'm compiling a list of difficult questions just to watch your brilliant mind work! (Just kidding... mostly!) I love your curiosity. 🤔", 
+       "Your unique gift for writing articles and poems makes the world a richer place. Thank you for sharing your gifts. I'm your biggest fan. 👏", 
+       "Two weeks left! We are so close to adding more precious memories to our vault of cherished moments. The anticipation is growing! 🤩", 
+       "I love that you are multi-talented. It means every day with you is a new adventure, a new facet of you to discover. You're endlessly fascinating. 💫", 
+       "I think about how cute you are when you are focused on your studies or writing. That dedication is beautiful, my love. I'm so proud. 💕", 
+       "Your ability to be an excellent student and still be the kindest person I know is truly remarkable. Go you! You're an inspiration. 🌟", 
+       "Single digits! I’m preparing a special gift that I hope will be worthy of someone I want to preserve for life. You deserve the world. 🌍❣️", 
+       "My favorite words are the ones you sing to me. They are just as beautiful as your everyday sweet voice. Can't wait for a private concert! 🎤", 
+       "You understand me better than anyone. That safety and comfort is the most precious thing I hold. Thank you for being my safe place. 🏡", 
+       "One week until I can hold the hand of the person who knows how to handle every situation—including my over-excitement right now! I'm so thrilled! 🥳", 
+       "Thinking about that perfect balance of pretty and intelligent you possess. It’s what makes you so captivating. You are divine. ✨", 
+       "Your melodious voice will be the first sound I want to hear clearly, without a phone screen between us. Soon, my darling, soon. 📞➡️❌", 
+       "I've been reflecting on how multitalented you are. You inspire me to pursue my own passions more fiercely. You make me better. ⬆️", 
+       "Just three days until I'm reunited with my gorgeous, deep-thinking love. Every thought is about you. I can practically taste the air there! 😋", 
+       "Tomorrow, I will be dreaming of your cute, pretty face. The wait is nearly over, my love! See you in my dreams. 💭💕", 
+       "Last day! The best article, the most beautiful poem, the most challenging academic topic—none are as perfect as you. See you soon! ❤️❣️💕" 
+   ];
+
+
+   themeBtn.addEventListener("click", () => {
+     currentThemeIndex = (currentThemeIndex + 1) % themes.length;
+     const newTheme = themes[currentThemeIndex];
+     document.body.setAttribute("data-theme", newTheme);
+     themeBtn.textContent = newTheme === "romantic" ? "💖" : newTheme === "midnight" ? "🌌" : "👑";
+   });
+
+
+   musicControlBtn.addEventListener("click", toggleBackgroundMusic);
+   function toggleBackgroundMusic() {
+     if (backgroundMusic.paused) {
+       backgroundMusic.play().then(() => {
+         musicControlBtn.innerHTML = '<i class="fas fa-pause"></i>';
+       }).catch(error => { 
+           console.error("Audio play failed:", error); 
+       });
+     } else {
+       backgroundMusic.pause();
+       musicControlBtn.innerHTML = '<i class="fas fa-play"></i>';
+     }
+   }
+
+
+   function createBubble() {
+       const bubble = document.createElement('div');
+       bubble.classList.add('bubble');
+       const duration = Math.random() * 5 + 5;
+       const delay = Math.random() * 2;
+       const drift = Math.random();
+       bubble.style.left = `${Math.random() * 100}vw`;
+       bubble.style.animationDuration = `${duration}s`;
+       bubble.style.animationDelay = `${delay}s`;
+       bubble.style.setProperty('--drift', drift);
+       bubblesContainer.appendChild(bubble);
+       bubble.addEventListener('animationend', () => { bubble.remove(); });
+   }
+   setInterval(createBubble, 500);
+
+
+   window.revealMessage = function() {
+       if(quizPassed) return;
+
+
+       if (!dailyContentSection.classList.contains('revealed')) {
+           if (daysLeftGlobal === quizDay) {
+               quizActive = true;
+               dailyContentSection.style.cursor = 'default'; 
+               showQuizQuestion(0); 
+           } else {
+               quizActive = false;
+               let index = startDay - daysLeftGlobal; 
+               if (index < 0) index = 0; 
+               if (index >= dailyContent.length) index = dailyContent.length - 1;
+               
+               if(dailyContent[index]) {
+                   messageBodyElement.textContent = dailyContent[index];
+               } else {
+                   messageBodyElement.textContent = "Every day with you is a gift. 💖";
+               }
+
+
+               if (daysLeftGlobal < 1) {
+                   messageBodyElement.textContent = "The moment is here! Go meet your Suubuu! 🎉";
+               } 
+           }
+           
+           dailyContentSection.classList.add('revealed');
+           dailyContentSection.classList.remove('tap-to-reveal');
+
+
+           if (backgroundMusic.paused) {
+               backgroundMusic.play().then(() => { musicControlBtn.innerHTML = '<i class="fas fa-pause"></i>'; }).catch(e => console.log("Autoplay prevented."));
+           }
+       }
+   }
+   // --- Updated Quiz Logic ---
+   function showQuizQuestion(index) {
+       const q = quizData[index];
+       
+       // Calculate progress percentage
+       const progressPercent = (index / quizData.length) * 100;
+
+
+       let optionsHTML = q.options.map((option, i) => {
+           return `<button class="quiz-option" onclick="handleAnswer(${index}, ${i})">${option}</button>`;
+       }).join('');
+
+
+       messageBodyElement.innerHTML = `
+           <div class="quiz-container">
+               <div class="progress-container">
+                   <div class="progress-bar" style="width: ${progressPercent}%"></div>
+               </div>
+               
+               <div class="quiz-question">${q.question}</div>
+               <div id="optionsContainer" class="quiz-options">${optionsHTML}</div>
+               <button id="hintButton" onclick="showHint(${index})">Need a hint?</button>
+               <div id="quizFeedback"></div>
+           </div>
+       `;
+   }
+
+
+   window.handleAnswer = function(qIndex, optionIndex) {
+       const q = quizData[qIndex];
+       const correctIndex = q.correct;
+       const feedbackEl = document.getElementById('quizFeedback');
+       const optionButtons = document.querySelectorAll('.quiz-option');
+       const optionsContainer = document.getElementById('optionsContainer');
+
+
+       // Disable clicks temporarily
+       optionButtons.forEach(button => button.disabled = true);
+       document.getElementById('hintButton').style.display = 'none';
+
+
+       if (optionIndex === correctIndex) {
+           // CORRECT
+           soundCorrect.currentTime = 0; 
+           soundCorrect.play(); // Play Ding
+
+
+           optionButtons[optionIndex].classList.add('correct');
+           feedbackEl.textContent = "Correct! ✨";
+           feedbackEl.style.color = "green";
+           
+           // Update progress bar to reflect this step is done
+           const progressBar = document.querySelector('.progress-bar');
+           const nextProgress = ((qIndex + 1) / quizData.length) * 100;
+           progressBar.style.width = `${nextProgress}%`;
+
+
+           currentQuestionIndex++;
+           
+           setTimeout(() => {
+               if (currentQuestionIndex < quizData.length) {
+                   showQuizQuestion(currentQuestionIndex);
+               } else {
+                   showGiftBox(); // Show gift box instead of direct reward
+               }
+           }, 1500);
+
+
+       } else {
+           // INCORRECT
+           soundWrong.currentTime = 0; 
+           soundWrong.play(); // Play Buzz
+
+
+           optionButtons[optionIndex].classList.add('incorrect');
+           
+           // Add Shake Animation
+           optionsContainer.classList.add('shake-effect');
+
+
+           feedbackEl.textContent = "Oops! That wasn't it. The quiz will reset.";
+           feedbackEl.style.color = "red";
+           
+           setTimeout(() => {
+               currentQuestionIndex = 0;
+               quizActive = false;
+               dailyContentSection.style.cursor = 'pointer';
+               daysLeftGlobal_old = -1; 
+               updateCountdown();
+           }, 2000);
+       }
+   }
+
+
+   window.showHint = function(qIndex) {
+       const hint = quizData[qIndex].hint;
+       const feedbackEl = document.getElementById('quizFeedback');
+       feedbackEl.textContent = `Hint: ${hint}`;
+       feedbackEl.style.color = "var(--text-muted)";
+       document.getElementById('hintButton').style.display = 'none';
+   }
+
+
+   // --- New Gift Box Reveal ---
+   function showGiftBox() {
+       dailyContentSection.classList.add('revealed');
+       dailyContentSection.classList.remove('tap-to-reveal');
+       dailyContentSection.style.cursor = 'default';
+
+
+       dailyContentSection.innerHTML = `
+           <div class="gift-box-wrapper" onclick="unwrapGift()">
+               <div class="gift-icon">🎁</div>
+               <div class="click-to-open">Click to Unwrap!</div>
+           </div>
+       `;
+   }
+
+
+   window.unwrapGift = function() {
+       soundUnwrap.play(); // Play magical sound
+       createConfetti(150); // More confetti!
+       showReward(); // Now show the actual voucher
+   }
+
+
+   function showReward() {
+       localStorage.setItem("suubuu_quiz_passed", "true");
+       quizPassed = true;
+       
+       dailyContentSection.innerHTML = `
+           <div class="reward-container">
+               <div class="reward-title">You're an Expert!</div>
+               <p class="reward-subtitle">You passed the 'Us' quiz! Here's your reward:</p>
+               
+               <div class="voucher-details">
+                   <img src="https://placehold.co/300x150/7CB342/FFFFFF?text=Big+Basket+Gift+Card&font=poppins" alt="Big Basket Gift Card">
+                   <p><strong>Big Basket Instant Gift Voucher INR 250</strong></p>
+                   <p>Voucher Code: <span class="code-value" id="voucherCode">59806491544</span></p>
+                   <p>PIN: <span class="code-value" id="voucherPin">073043</span></p>
+                   <p style="font-size: 0.9rem; text-align: center; margin-top: 15px;">Expires on: 10.11.2026</p>
+               </div>
+               
+               <button id="copyButton" onclick="copyToClipboard('voucherCode')">Copy Voucher Code</button>
+               <div id="quizFeedback" style="font-size: 0.9rem; margin-top: 10px;"></div>
+           </div>
+       `;
+       confettiContainer.style.zIndex = "3000"; 
+       createConfetti(100); 
+   }
+
+
+   window.copyToClipboard = function(elementId) {
+       const textToCopy = document.getElementById(elementId).innerText;
+       
+       const tempTextArea = document.createElement('textarea');
+       tempTextArea.value = textToCopy;
+       document.body.appendChild(tempTextArea);
+       tempTextArea.select();
+       document.execCommand('copy'); 
+       document.body.removeChild(tempTextArea);
+
+
+       const feedbackEl = document.getElementById('quizFeedback');
+       feedbackEl.textContent = "Voucher Code copied to clipboard!";
+       feedbackEl.style.color = "green";
+   }
+
+
+   function updateCountdown() {
+     const now = new Date().getTime();
+     const distance = countDownDate - now;
+     
+     const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+     const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+     const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+     const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+
+     emojiFooterElement.textContent = rotatingEmojis[emojiIndex];
+     emojiIndex = (emojiIndex + 1) % rotatingEmojis.length;
+
+
+     daysLeftGlobal = days;
+
+
+     document.getElementById("days").textContent = days;
+     document.getElementById("hours").textContent = hours;
+     document.getElementById("minutes").textContent = minutes;
+     document.getElementById("seconds").textContent = seconds;
+
+
+     if (daysLeftGlobal !== daysLeftGlobal_old) {
+         if (!quizPassed) {
+             dailyContentSection.classList.remove('revealed');
+             dailyContentSection.classList.add('tap-to-reveal');
+             dailyContentSection.style.cursor = 'pointer';
+             quizActive = false;
+             currentQuestionIndex = 0; 
+             
+             if (days === quizDay) {
+                 messageBodyElement.innerHTML = `Tap here for a special surprise quiz! 🎁`;
+             } else if (days >= 0 && days <= startDay) {
+                 messageBodyElement.innerHTML = `Tap here to reveal your personalized thought! (${days} Days Remaining)`;
+             } else {
+                 messageBodyElement.innerHTML = `Tap here to reveal your message!`;
+             }
+         }
+     }
+     daysLeftGlobal_old = daysLeftGlobal;
+
+
+     if (distance < 0) {
+       clearInterval(timer);
+       showCelebration();
+       backgroundMusic.pause();
+       musicControlBtn.innerHTML = '<i class="fas fa-play"></i>';
+     }
+   }
+   
+   updateCountdown();
+   const timer = setInterval(updateCountdown, 1000);
+   
+   if(quizPassed) {
+       showReward();
+   }
+
+
+   function showCelebration() {
+     document.querySelector('.container').innerHTML = `
+       <div class="finished">
+         <h1>The Wait is Over! 🎉</h1>
+         <p class="subtitle" style="margin-bottom: 20px;">Time to meet Suubuu 💖</p>
+         <button class="btn" onclick="location.reload()">Restart Countdown</button>
+       </div>
+     `;
+     createConfetti(100);
+   }
+
+
+   function createConfetti(count = 60) {
+       const colors = ["#ff7eb3", "hotpink", "#ff9770", "#ffd194", "#fbc2eb", "#a18cd1"];
+       for (let i = 0; i < count; i++) {
+           const el = document.createElement("div");
+           el.className = "piece";
+           const w = 8 + Math.random() * 12;
+           el.style.width = w + "px";
+           el.style.height = (w * 0.8) + "px";
+           el.style.left = Math.random() * 100 + "%";
+           el.style.background = colors[Math.floor(Math.random() * colors.length)];
+           el.style.opacity = 0.9;
+           el.style.animationDuration = (2.8 + Math.random() * 2.4) + "s";
+           el.style.animationDelay = (Math.random() * 2.5) + "s"; 
+           confettiContainer.appendChild(el);
+           el.addEventListener('animationend', () => { el.remove(); });
+       }
+   }
+ </script>
+</body>
+</html>
